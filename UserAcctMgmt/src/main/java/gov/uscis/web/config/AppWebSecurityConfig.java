@@ -3,7 +3,10 @@ package gov.uscis.web.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -71,5 +74,19 @@ public class AppWebSecurityConfig extends AbstractAppWebSecurityConfigurer {
     @Override
     public Resource keyStore() {
         return new ClassPathResource("keystore.jks");
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeUrls()
+                    .antMatchers("/saml/web/**").permitAll()
+                    .antMatchers("/registration.jsp").permitAll()
+                    .anyRequest().fullyAuthenticated()
+                .and()
+                    .addFilterBefore(metadataGeneratorFilter(), AbstractPreAuthenticatedProcessingFilter.class)
+                    .addFilterAfter(samlFilter(), BasicAuthenticationFilter.class)
+                .exceptionHandling()
+                    .authenticationEntryPoint(samlEntryPoint());
     }
 }

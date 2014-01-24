@@ -1,0 +1,59 @@
+This development environment is based on Vagrant and Salt
+
+You can read more about the docs online.
+
+TO INSTALL THE ENVIRONMENT FOR THE FIRST TIME:
+------------------------------------------------------------------------------------------
+    - Have patience
+    - Be connected to a fast internet connection (for downloading dependencies)
+    - Run the following commands:
+        - mvn clean install
+        - vagrant box add precise64 http://files.vagrantup.com/precise64.box
+        - vagrant plugin install vagrant-hostmanager
+        - vagrant plugin install vagrant-salt
+        - vagrant up
+
+        At the end of 'vagrant up', you will need to provide your password for updating the /etc/hosts file
+        so the VMs can be addressed by their domain names.
+
+There are three virtual machines in all:
+    - OpenAM            http://sso.acorn.ads.example.com:8080/openam
+    - UserAcctMgmt      http://useracct.acorn.ads.example.com:8080/
+    - ExternalApp       http://externalapp.acorn.ads.example.com:8080/
+
+By running 'vagrant up', there are a list of dependencies that will be downloaded, and configured
+    to make the above configuration work.
+
+
+COMMON VM COMMANDS
+-------------------------------------------------------------------------------------------
+    - To start all VMs (If you haven't performed the install, see above instructions):
+        - vagrant up
+    - To suspend all VMs:
+        - vagrant suspend
+    - To shutdown all VMs:
+        - vagrant halt
+    - To restart all VMs:
+        - vagrant reload
+    - To destroy all VMs: (!!!! BE VERY CAUTIOUS !!!!!)
+        - vagrant destroy
+    - To SSH into a VM:
+        - vagrant ssh <vmname>
+
+        The following vnames are defined:
+            - openam
+            - useracctmgmt
+            - externalapp
+
+            Example usage: 'vagrant ssh externalapp'
+
+DETAILS
+--------------------------------------------------------------------------------------------
+All the VMs have oracle-jdk7 and tomcat7 installed.
+
+COMMON ISSUES
+--------------------------------------------------------------------------------------------
+
+    - If you run out of memory, restart the appserver (tomcat7):
+        - vagrant ssh <vmname>
+        - sudo service tomcat7 restart
