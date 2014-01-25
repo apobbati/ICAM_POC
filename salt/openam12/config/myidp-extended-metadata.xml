@@ -31,7 +31,7 @@
         </Attribute>
         <Attribute name="saeAppSecretList"/>
         <Attribute name="signingCertKeyPass">
-            <Value>AQIC3OmZVL0PBJJ74O4DtOcdNGOkBW+VhO1Q</Value>
+            <Value/>
         </Attribute>
         <Attribute name="encryptionCertAlias">
             <Value>test</Value>

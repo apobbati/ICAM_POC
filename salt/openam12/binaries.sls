@@ -87,3 +87,10 @@ openam-provision-tools:
     - cwd: /usr/share/tomcat7/openam-admin-tools/openam/bin
     - require:
       - cmd: openam-admintools-setup
+
+openam-provision-finish:
+  cmd.run:
+    - name: 'service tomcat7 restart;sleep 200'
+    - user: root
+    - require:
+      - cmd: openam-provision-tools
