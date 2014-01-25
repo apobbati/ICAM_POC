@@ -17,13 +17,7 @@ tomcat7:
     - watch:
       - file: tomcat7
       - file: /etc/tomcat7/server.xml
-      - file: /etc/tomcat7/tomcat-users.xml
-
-tomcat7-admin:
-  pkg:
-    - installed
-    - require:
-      - pkg: tomcat7
+      - file: /var/lib/tomcat7/webapps/ROOT.war
 
 /etc/tomcat7/server.xml:
   file:
@@ -33,10 +27,6 @@ tomcat7-admin:
     - group: tomcat7
     - mode: 644
 
-/etc/tomcat7/tomcat-users.xml:
+/var/lib/tomcat7/webapps/ROOT:
   file:
-    - managed
-    - source: salt://appserver/tomcat-users.xml
-    - user: root
-    - group: tomcat7
-    - mode: 644
+    - absent

@@ -6,11 +6,12 @@ base:
 
   'sso.acorn.ads.example.com':
     - openam12.tomcat7
+    - openam12.cleanup
     - openam12.binaries
 
-  'useracct.acorn.ads.example.com':
+  'useracctmgmt.acorn.ads.example.com':
     - appserver.tomcat7
-    - apps.useracct
+    - apps.useracctmgmt
 
   'externalapp.acorn.ads.example.com':
     - appserver.tomcat7

@@ -17,6 +17,8 @@ tomcat7:
     - watch:
       - file: tomcat7
       - file: /etc/tomcat7/server.xml
+      - file: /etc/tomcat7/tomcat-users.xml
+      - pkg: tomcat7-admin
 
 /etc/tomcat7/server.xml:
   file:
@@ -25,3 +27,17 @@ tomcat7:
     - user: root
     - group: tomcat7
     - mode: 644
+
+/etc/tomcat7/tomcat-users.xml:
+  file:
+    - managed
+    - source: salt://openam12/tomcat-users.xml
+    - user: root
+    - group: tomcat7
+    - mode: 644
+
+tomcat7-admin:
+  pkg:
+    - installed
+    - require:
+      - pkg: tomcat7

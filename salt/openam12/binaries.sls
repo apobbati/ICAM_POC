@@ -7,18 +7,6 @@
     - recurse:
       - mode
 
-/var/lib/tomcat7/webapps/ROOT:
-  file:
-    - absent
-
-/usr/share/tomcat7/openam:
-  file:
-    - absent
-
-/usr/share/tomcat7/.openamcfg:
-  file:
-    - absent
-
 openam-dist:
   archive:
     - extracted
@@ -65,3 +53,37 @@ openam-configuration-setup:
     - user: tomcat7
     - require:
       - archive: openam-configurator-tools
+
+openam-admin-logs-dir:
+  file.directory:
+    - name: /usr/share/tomcat7/logs/openam
+    - user: tomcat7
+    - group: tomcat7
+    - makedirs: True
+
+openam-admin-pwd-file:
+  file.managed:
+    - name: /usr/share/tomcat7/amadmin.pwd
+    - source: salt://openam12/config/amadmin.pwd
+    - user: tomcat7
+    - group: tomcat7
+    - mode: 400
+
+openam-admintools-setup:
+  cmd.run:
+    - name: './setup -p /usr/share/tomcat7/openam -d /usr/share/tomcat7/logs/openam/debug -l /usr/share/tomcat7/logs/openam/log'
+    - cwd: /usr/share/tomcat7/openam-admin-tools
+    - user: tomcat7
+    - require:
+      - archive: openam-admin-tools
+      - file: openam-admin-logs-dir
+      - file: openam-admin-pwd-file
+      - cmd: openam-configuration-setup
+
+openam-provision-tools:
+  cmd.script:
+    - name: salt://openam12/provision-config.sh
+    - user: tomcat7
+    - cwd: /usr/share/tomcat7/openam-admin-tools/openam/bin
+    - require:
+      - cmd: openam-admintools-setup

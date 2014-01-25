@@ -57,3 +57,9 @@ COMMON ISSUES
     - If you run out of memory, restart the appserver (tomcat7):
         - vagrant ssh <vmname>
         - sudo service tomcat7 restart
+
+DEPLOYING THE APPLICATIONS
+--------------------------------------------------------------------------------------------
+    - Every time you run 'mvn install' on the applications (i.e. generate a new war file),
+        the appropriate tomcat instance will be restarted, so you can see changes. It might
+        take time to restart, depending on how fast your machine is.

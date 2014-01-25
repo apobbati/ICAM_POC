@@ -4,3 +4,4 @@ essential-packages:
       - vim
       - git
       - unzip
+      - curl

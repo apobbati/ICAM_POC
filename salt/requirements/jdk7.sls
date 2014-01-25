@@ -20,3 +20,8 @@ jdk7:
   file.append:
     - text:
       - 'JAVA_HOME="/usr/lib/jvm/java-7-oracle"'
+
+/etc/profile:
+  file.append:
+    - text:
+      - 'JAVA_HOME="/usr/lib/jvm/java-7-oracle"'

@@ -25,7 +25,7 @@ public class AppWebSecurityConfig extends AbstractAppWebSecurityConfigurer {
 
     @Override
     public String idpMetadataUrl() {
-        return "http://localhost:8080/openam/saml2/jsp/exportmetadata.jsp?entityid=myidp";
+        return "http://sso.acorn.ads.example.com:8080/openam/saml2/jsp/exportmetadata.jsp?entityid=myidp";
     }
 
     @Override
@@ -35,7 +35,7 @@ public class AppWebSecurityConfig extends AbstractAppWebSecurityConfigurer {
 
     @Override
     public String spMetadataUrl() {
-        return "http://localhost:8080/openam/saml2/jsp/exportmetadata.jsp?entityid=externalapp";
+        return "http://sso.acorn.ads.example.com:8080/openam/saml2/jsp/exportmetadata.jsp?entityid=externalapp";
     }
 
     @Override
