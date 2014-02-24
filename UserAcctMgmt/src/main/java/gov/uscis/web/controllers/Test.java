@@ -23,4 +23,35 @@ public class Test {
     public @ResponseBody String bar() {
         return "World!";
     }
+
+    @PreAuthorize("isFullyAuthenticated()")
+    @RequestMapping(value = "/endpoint", method = RequestMethod.GET)
+    public @ResponseBody Person blah() {
+        Person person = new Person();
+        person.setName("Foobar");
+        person.setAddress("Baker Street");
+        return person;
+    }
+
+    class Person {
+        private String name;
+
+        private String address;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+    }
 }

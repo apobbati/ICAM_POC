@@ -54,23 +54,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 
-  #config.vm.define vm_name = "externalapp" do |config|
-  #  config.vm.box = "precise64"
-  #  config.vm.hostname = "externalapp." + domain
-  #  config.vm.network :private_network, ip: "192.168.43.22"
-  #
-  #  config.vm.provider "virtualbox" do |v|
-  #    v.memory = 1024
-  #  end
-  #
-  #  config.vm.synced_folder "./",    "/srv/repo/"
-  #  config.vm.synced_folder "salt/", "/srv/salt/"
-  #  config.vm.synced_folder "pillars/", "/srv/pillars/"
-  #
-  #  config.vm.provision :salt do |salt|
-  #    salt.minion_config = "salt/minion.conf"
-  #    salt.run_highstate = true
-  #    salt.verbose = true
-  #  end
-  #end
+  config.vm.define vm_name = "externalapp" do |config|
+    config.vm.box = "precise64"
+    config.vm.hostname = "externalapp." + domain
+    config.vm.network :private_network, ip: "192.168.43.22"
+
+    config.vm.provider "virtualbox" do |v|
+      v.memory = 1024
+    end
+
+    config.vm.synced_folder "./",    "/srv/repo/"
+    config.vm.synced_folder "salt/", "/srv/salt/"
+    config.vm.synced_folder "pillars/", "/srv/pillars/"
+
+    config.vm.provision :salt do |salt|
+      salt.minion_config = "salt/minion.conf"
+      salt.run_highstate = true
+      salt.verbose = true
+    end
+  end
 end

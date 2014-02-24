@@ -21,10 +21,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-@Configuration
-@EnableWebMvc
-@ComponentScan(basePackages = {"gov.uscis.web"})
-public class AppMvcConfig extends WebMvcConfigurerAdapter {
+public abstract class AbstractAppMvcConfig extends WebMvcConfigurerAdapter {
     @Bean
     public MultipartResolver multipartResolver() {
         CommonsMultipartResolver resolver = new CommonsMultipartResolver();

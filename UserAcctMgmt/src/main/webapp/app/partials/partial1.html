@@ -1,0 +1,16 @@
+<p>This is the partial for view 1.</p>
+
+<div>
+  <button data-ng-click="callLocalService()">Call Local Service</button><br>
+  <button data-ng-click="callRemoteService()">Call Remote Service</button>
+
+  Local Result:
+  <textarea>{{localResult}}</textarea>
+
+  <br>
+
+  Remote Result:
+  <textarea>{{remoteResult}}</textarea>
+
+  <iframe data-ng-src="{{endpoint}}" class="ng-hide"></iframe>
+</div>
