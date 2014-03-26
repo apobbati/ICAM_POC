@@ -37,6 +37,4 @@ angular.module('myApp.controllers', []).
     };
   }])
   .controller('MyCtrl2', ['FooService', function(FooService) {
-    console.log('Inside MyCtrl2');
-    console.log('Saying hello: ' + FooService.sayHello('Abhinav'));
   }]);
