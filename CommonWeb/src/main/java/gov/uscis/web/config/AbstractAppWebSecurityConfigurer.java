@@ -119,7 +119,16 @@ public abstract class AbstractAppWebSecurityConfigurer extends WebSecurityConfig
 
     @Bean(name = "metadataGeneratorFilter")
     public MetadataGeneratorFilter metadataGeneratorFilter() {
-        return new MetadataGeneratorFilter(new MetadataGenerator());
+        MetadataGenerator metadataGenerator = new MetadataGenerator();
+
+        // Explicitly set the signing algorithm here
+        // In most cases, the signing algorithm is determined by the Credential
+        // object, which in most cases is extracted from public-private keypair
+        // living in the keystore
+
+        // metadataGenerator.setSigningAlgorithm(...);
+
+        return new MetadataGeneratorFilter(metadataGenerator);
     }
 
     @Bean(name = "samlEntryPoint")
